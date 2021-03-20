@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" type="text/css" href="css/estilo.css">
+<script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/validador.js"></script>
+<script type="text/javascript" src="js/predictor.js"></script>
+<script type="text/javascript" src="js/message.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // load data in html components
+        loadData();
+
+        $("#start_validation").click(function () {
+
+            // Validation data
+            var licensePlateNumber = $("#license_value").val();
+            var dayValue = $("#day_date_value").val();
+            var hourValue = $("#hour_time_value").val();
+            var minuteValue = $("#minute_time_value").val();
+
+            if (licensePlateNumber == "") {
+                alert("Ingrese su numero de placa");
+                return false;
+            }
+
+
+            if (dayValue == "") {
+                alert("Selecione un dia (dia)");
+                return false;
+            }
+            if (hourValue == "") {
+                alert("Selecione el tiempo (hora)");
+                return false;
+            }
+            if (minuteValue == "") {
+                alert("Seleccione un minuto (minuto)");
+                return false;
+            }
+
+            var newObj = new Vehi(licensePlateNumber);
+            var result = newObj.predictorPicoYPlaca(dayValue, hourValue, minuteValue);
+
+            alert(result);
+
+          
+
+        });
+
+    });
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pico y Placa Predictor</title>
+
+
+</head>
+
+
+<body>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-repeat: no-repeat;
+
+            background-size: 100% 100%;
+
+
+            background-image: url(img/fondoQuito.jpg);
+
+
+        }
+    </style>
+
+
+    <center>
+        <div class="form">
+            <div><h2> Ingrese los datos de su vehiculo y Horario</h2></div>
+            <div class="login page">
+                <br>
+                <table class="form table" style="text-align: center">
+                    <tr>
+                        <td><label >Matricula: </label></td>
+                        <td><input id="license_value" type="text" placeholder="Ingrese su matricula"></td>
+                    </tr>
+                    <tr>
+                        <td><label>Fecha: </label></td>
+                        <td><label>Dia:</label> <select id="day_date_value"></select></td>
+                    </tr>
+                    <tr>
+                        <td><label>Ingrese la </label> </td>
+                        <td>
+                            <label >Hora: </label> <select id="hour_time_value"></select>;
+                            <label> Minutos: </label> <select id="minute_time_value"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center;">
+                            <button id="start_validation" class="form button" type="submit">Buscar</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </center>
+
+</body>
+
+</html>
